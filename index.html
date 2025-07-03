@@ -1,128 +1,304 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>COPITO | Inicio</title>
-  <link rel="stylesheet" href="estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copito - Maquillaje</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffffff, #f7c4d2);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            padding: 40px;
+        }
+
+        .logo {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 60px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto;
+        }
+
+        .logo-text {
+            color: #c44569;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .makeup-items {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .makeup-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .makeup-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .lipstick {
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(to bottom, #ff6b9d, #c44569);
+            border-radius: 10px 10px 50px 50px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .lipstick::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #ff6b9d;
+            border-radius: 50%;
+        }
+
+        .eyeshadow {
+            width: 70px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff9ff3, #c44569, #f8b500);
+            border-radius: 10px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .eyeshadow::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            background: #ff6b9d;
+            border-radius: 50%;
+        }
+
+        .eyeshadow::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background: #f8b500;
+            border-radius: 50%;
+        }
+
+        .mascara {
+            width: 20px;
+            height: 80px;
+            background: linear-gradient(to bottom, #333, #000);
+            border-radius: 10px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .mascara::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 20px;
+            background: #ff6b9d;
+            border-radius: 10px;
+        }
+
+        .tagline {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .loading {
+            width: 200px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            margin: 30px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            animation: loading 3s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .sparkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 3s infinite;
+        }
+
+        .sparkle:nth-child(1) { width: 4px; height: 4px; top: 20%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { width: 6px; height: 6px; top: 40%; left: 80%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { width: 3px; height: 3px; top: 60%; left: 20%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { width: 5px; height: 5px; top: 80%; left: 70%; animation-delay: 1.5s; }
+        .sparkle:nth-child(5) { width: 4px; height: 4px; top: 30%; left: 90%; animation-delay: 2s; }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .redirect-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                padding: 20px 40px;
+            }
+            
+            .makeup-items {
+                gap: 20px;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="nav-container">
-      <div class="nav-logo-container">
-        <img src="logo.png" alt="Logo Nature" class="logo">
-        <h1 class="logo-title">COPITO</h1>
-      </div>
-      <nav>
-        <a href="carrito.html">Carrito</a>
-        <a href="favoritos.html">Favoritos</a>
-        <a href="ofertas.html">Ofertas</a>
-      </nav>
+    <div class="sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
     </div>
-  </header>
 
-  <main class="productos" id="contenedor-productos"></main>
-
-  <script>
-    let productos = [
-      
-  {
-    nombre: "Corrector |Copito| CoverTouch",
-    precio: 199,
-    imagen: "copito_img_1.jpg",
-    descripcion: "Cobertura ligera con acabado natural en tono beige claro."
-  },
-  {
-    nombre: "Base líquida |Copito| SkinFlawless",
-    precio: 289,
-    imagen: "copito_img_2.jpg",
-    descripcion: "Base de larga duración para un acabado cálido."
-  },
-  {
-    nombre: "Brillo labial |Copito| ShineKiss",
-    precio: 159,
-    imagen: "copito_img_3.jpg",
-    descripcion: "Rubor en polvo tono coral vibrante con empaque rosa."
-  },
-  {
-    nombre: "Rubor |Copito| CheekPop",
-    precio: 179,
-    imagen: "copito_img_4.jpg",
-    descripcion: "Polvo iluminador suave para resplandor natural."
-  },
-  {
-    nombre: "Paleta de sombras |Copito| ColorVibes",
-    precio: 349,
-    imagen: "copito_img_5.jpg",
-    descripcion: "Brillo labial intenso con pigmento rojizo metálico."
-  },
-  {
-    nombre: "Iluminador |Copito| GlowBeam",
-    precio: 229,
-    imagen: "copito_img_6.jpg",
-    descripcion: "9 tonos cálidos y morados para looks románticos y modernos."
-  }
-];
-
-  
-
-    // Agregar productos personalizados guardados desde productos.html
-    const personalizados = JSON.parse(localStorage.getItem('productos')) || [];
-    personalizados.forEach(p => {
-      const yaExiste = productos.some(prod => prod.nombre === p.nombre && prod.precio == p.precio);
-      if (!yaExiste) productos.push(p);
-    });
-
-    const contenedor = document.getElementById('contenedor-productos');
-
-    productos.forEach(producto => {
-      const card = document.createElement('div');
-      card.className = 'producto';
-      const nombreURL = encodeURIComponent(producto.nombre);
-      card.innerHTML = `
-        <img src="${producto.imagen}" alt="${producto.nombre}">
-        <h2>${producto.nombre}</h2>
-        <p>$${producto.precio}</p>
-        <div class="botones-acciones">
-          <button onclick='agregarAFavoritos(${JSON.stringify(producto)})'>❤</button>
-          <button onclick='agregarAlCarrito(${JSON.stringify(producto)})'>🛒</button>
-          <button onclick='verDetalles("${nombreURL}")'>🔍</button>
+    <div class="container">
+        <div class="logo">
+            <!-- Reemplaza "logo-copito.png" con la ruta de tu imagen -->
+            <img src="logo.png" alt="Logo Copito">
+            <div class="logo-text">Maquillaje Copito</div>
         </div>
-      `;
-      contenedor.appendChild(card);
-    });
+        
+        <div class="makeup-items">
+            <div class="makeup-item">
+                <div class="lipstick"></div>
+            </div>
+            <div class="makeup-item">
+                <div class="eyeshadow"></div>
+            </div>
+            <div class="makeup-item">
+                <div class="mascara"></div>
+            </div>
+        </div>
+        
+        <div class="tagline">
+            Belleza que inspira, maquillaje que transforma
+        </div>
+        
+        <div class="loading"></div>
+        
+        <div class="redirect-text">
+            Cargando tu experiencia de belleza...
+        </div>
+    </div>
 
-    function agregarAlCarrito(producto) {
-      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-      carrito.push(producto);
-      localStorage.setItem('carrito', JSON.stringify(carrito));
-      agregarNotificacion(`Agregaste "${producto.nombre}" al carrito`);
-      alert(`${producto.nombre} agregado al carrito`);
-    }
+    <script>
+        // Redirección automática después de 5 segundos
+        setTimeout(function() {
+            // Cambia esta URL por la URL de tu página principal
+            window.location.href = "inicio.html";
+        }, 5000);
 
-    function agregarAFavoritos(producto) {
-      let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-      favoritos.push(producto);
-      localStorage.setItem('favoritos', JSON.stringify(favoritos));
-      agregarNotificacion(`Añadiste "${producto.nombre}" a favoritos`);
-      alert(`${producto.nombre} añadido a favoritos`);
-    }
+        // Opcional: Permitir click para entrar inmediatamente
+        document.addEventListener('click', function() {
+            window.location.href = "inicio.html";
+        });
 
-    function agregarNotificacion(mensaje) {
-      let notificaciones = JSON.parse(localStorage.getItem('notificaciones')) || [];
-      const nueva = {
-        titulo: "Notificación de NATURE",
-        mensaje,
-        fecha: new Date().toLocaleString(),
-        leida: false
-      };
-      notificaciones.unshift(nueva);
-      localStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-    }
-
-    function verDetalles(nombreProducto) {
-      window.location.href = `detalle.html?nombre=${nombreProducto}`;
-    }
-  </script>
+        // Opcional: Permitir tecla Enter para entrar inmediatamente
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                window.location.href = "inicio.html";
+            }
+        });
+    </script>
 </body>
 </html>
